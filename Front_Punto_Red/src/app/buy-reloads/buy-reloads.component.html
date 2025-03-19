@@ -1,0 +1,32 @@
+<form class="max-w-lg mx-auto bg-gray-50 p-6 rounded-lg shadow-md dark:bg-gray-800 mt-16" (ngSubmit)="onSubmit()">
+  <!-- Campo para el operador (select) -->
+  <div class="mb-5">
+    <label for="operador" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Operador</label>
+    <select id="operador" [(ngModel)]="reloadData.operador" name="operador" class="shadow-xs bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" required>
+      <option value="">Selecciona un operador</option>
+      <option *ngFor="let supplier of suppliers" [value]="supplier.id">{{ supplier.name }}</option>
+    </select>
+  </div>
+
+  <!-- Campo para el número de teléfono -->
+  <div class="mb-5">
+    <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Número de teléfono</label>
+    <input type="tel" id="telefono" name="telefono" [(ngModel)]="reloadData.telefono" class="shadow-xs bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" placeholder="3001234567" pattern="^3\d{9}$" inputmode="numeric" maxlength="10" required title="El número debe comenzar con 3 y contener 10 dígitos." />
+  </div>
+
+  <!-- Campo para el valor de la recarga -->
+  <div class="mb-5">
+    <label for="valor-recarga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor de la recarga</label>
+    <input type="number" id="valor-recarga" name="valor-recarga" [(ngModel)]="reloadData.valor" class="shadow-xs bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" placeholder="30,000" min="1000" max="100000" step="1000" required />
+    <p class="text-xs text-gray-500 dark:text-gray-400">Valor mínimo: 1,000, valor máximo: 100,000.</p>
+  </div>
+
+  <!-- Botón de envío -->
+  <button type="submit" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+    Realizar recarga
+  </button>
+</form>
+
+<!-- Mensaje de éxito o error -->
+<p *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+<p *ngIf="successMessage" class="text-green-500">{{ successMessage }}</p>
